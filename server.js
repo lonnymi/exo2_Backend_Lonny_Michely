@@ -1,8 +1,10 @@
 // server.js
+require('dotenv').config();               // charge .env AVANT tout
 const app = require('./src/app');
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server listening on http://127.0.0.1:${PORT}`);
-});
+const HOST = process.env.HOST || '127.0.0.1';
 
+app.listen(PORT, HOST, () => {
+  console.log(`Server listening on http://${HOST}:${PORT}`);
+});
