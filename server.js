@@ -14,14 +14,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// (optionnel) petite page statique si tu veux une racine visible
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use('/', express.static(path.join(__dirname, 'views')));
 
+// Routes API
 app.use('/api/tasks', taskRoutes);
 
+// 404
 app.use((req, res, _next) => res.status(404).json({ error: 'Route introuvable', path: req.path }));
 
+// Error handler
 // eslint-disable-next-line no-unused-vars
 app.use((err, _req, res, _next) => {
   console.error(err);
